@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/auth" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/compute" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/compute/compute-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/compute/compute-api-impl" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/exec" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/upload" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/upload" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/upload/upload-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/upload/upload-api-impl" charset="UTF-8" />
+  </component>
+</project>

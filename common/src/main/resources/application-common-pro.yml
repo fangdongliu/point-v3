@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:mysql://39.106.57.140:3306/pt2?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    username: yidong
+    password: zhengwu
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true

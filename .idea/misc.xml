@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/common/pom.xml" />
+        <option value="$PROJECT_DIR$/auth/pom.xml" />
+        <option value="$PROJECT_DIR$/compute/pom.xml" />
+        <option value="$PROJECT_DIR$/upload/pom.xml" />
+        <option value="$PROJECT_DIR$/upload/upload-api/pom.xml" />
+        <option value="$PROJECT_DIR$/upload/upload-api-impl/pom.xml" />
+        <option value="$PROJECT_DIR$/compute/compute-api/pom.xml" />
+        <option value="$PROJECT_DIR$/compute/compute-api-impl/pom.xml" />
+        <option value="$PROJECT_DIR$/exec/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8.0_211" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
