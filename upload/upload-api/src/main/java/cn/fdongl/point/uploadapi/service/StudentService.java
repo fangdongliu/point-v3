@@ -1,5 +1,6 @@
 package cn.fdongl.point.uploadapi.service;
 
+import cn.fdongl.point.auth.vo.JwtUser;
 import cn.fdongl.point.uploadapi.exception.DataRepeatException;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,5 +12,5 @@ public interface StudentService extends UploadService{
      * @return 成功插入的学生选课记录条数
      * @throws DataRepeatException
      */
-    int upload(MultipartFile file, boolean allowCover)throws DataRepeatException;
+    int upload(MultipartFile file, boolean allowCover, JwtUser jwtUser)throws DataRepeatException;
 }

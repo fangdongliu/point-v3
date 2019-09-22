@@ -1,5 +1,6 @@
 package cn.fdongl.point.uploadapi.service;
 
+import cn.fdongl.point.auth.vo.JwtUser;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface CourseService extends UploadService{
@@ -9,5 +10,5 @@ public interface CourseService extends UploadService{
      * @param year 年份
      * @return 成功插入的条数
      */
-    int upload(MultipartFile file,int year);
+    int upload(MultipartFile file, int year, JwtUser jwtUser);
 }

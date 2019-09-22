@@ -1,5 +1,6 @@
 package cn.fdongl.point.uploadapi.controller;
 
+import cn.fdongl.point.auth.vo.JwtUser;
 import cn.fdongl.point.common.util.BaseController;
 import cn.fdongl.point.common.util.ErrorCode;
 import cn.fdongl.point.common.util.Result;
@@ -14,19 +15,19 @@ public class TeacherCourseController extends BaseController<TeacherCourseService
 
     @PostMapping("upload")
     public Object upload(
-            @RequestParam MultipartFile file, int year) {
-        return Result.of(ErrorCode.SUCCESS,service.upload(file,year));
+            @RequestParam MultipartFile file, int year, JwtUser jwtUser) {
+        return Result.of(ErrorCode.SUCCESS,service.upload(file,year,jwtUser));
     }
 
     @PostMapping("delete")
-    public Object deleteByFile(long fileId) {
-        return Result.of(ErrorCode.SUCCESS,service.deleteByFile(fileId));
+    public Object deleteByFile(long fileId,JwtUser jwtUser) {
+        return Result.of(ErrorCode.SUCCESS,service.deleteByFile(fileId,jwtUser));
     }
 
     @GetMapping("page")
     public Object page(@RequestParam int pageIndex,
-                     @RequestParam int pageSize) {
+                     @RequestParam int pageSize,JwtUser jwtUser) {
         return Result.of(ErrorCode.SUCCESS,
-                service.page(PageRequest.of(pageIndex - 1,pageSize)));
+                service.page(PageRequest.of(pageIndex - 1,pageSize),jwtUser));
     }
 }
