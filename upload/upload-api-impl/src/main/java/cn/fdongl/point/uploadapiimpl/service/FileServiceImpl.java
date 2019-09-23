@@ -69,4 +69,9 @@ public class FileServiceImpl implements FileService {
         FileCopyUtils.copy(file.getInputStream(), Files.newOutputStream(dest.toPath()));
         return f;
     }
+
+    @Override
+    public File save(MultipartFile file) {
+        return null;
+    }
 }

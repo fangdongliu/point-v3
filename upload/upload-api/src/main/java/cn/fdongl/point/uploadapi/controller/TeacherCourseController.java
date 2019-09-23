@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("teacher")
+@RequestMapping("teacherCourse")
 public class TeacherCourseController extends BaseController<TeacherCourseService>{
 
     @PostMapping("upload")
     public Object upload(
-            @RequestParam MultipartFile file, int year, JwtUser jwtUser) {
-        return Result.of(ErrorCode.SUCCESS,service.upload(file,year,jwtUser));
+            @RequestParam MultipartFile file, JwtUser jwtUser) throws Exception {
+        return Result.of(ErrorCode.SUCCESS,service.upload(file, jwtUser));
     }
 
     @PostMapping("delete")

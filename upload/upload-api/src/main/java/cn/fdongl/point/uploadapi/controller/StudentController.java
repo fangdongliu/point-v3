@@ -1,6 +1,7 @@
 package cn.fdongl.point.uploadapi.controller;
 
 import cn.fdongl.point.auth.vo.JwtUser;
+import cn.fdongl.point.common.exception.WorkbookCastException;
 import cn.fdongl.point.common.util.BaseController;
 import cn.fdongl.point.common.util.ErrorCode;
 import cn.fdongl.point.common.util.Result;
@@ -11,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("teacher")
+@RequestMapping("student")
 public class StudentController extends BaseController<StudentService>{
 
     @PostMapping("upload")
     public Object upload(
-            @RequestParam MultipartFile file, boolean allowCover, JwtUser jwtUser) throws DataRepeatException {
+            @RequestParam MultipartFile file, boolean allowCover, JwtUser jwtUser) throws DataRepeatException, WorkbookCastException {
         return Result.of(ErrorCode.SUCCESS,service.upload(file,allowCover,jwtUser));
     }
 

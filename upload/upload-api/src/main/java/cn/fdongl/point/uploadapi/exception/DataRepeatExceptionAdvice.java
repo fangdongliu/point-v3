@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.io.FileNotFoundException;
 
 @ControllerAdvice
-public class ExceptionAdvice {
+public class DataRepeatExceptionAdvice {
 
     @ResponseBody
     @ExceptionHandler(DataRepeatException.class)

@@ -32,4 +32,6 @@ public interface FileService {
      * @return 上传后的数据库数据
      */
     File save(MultipartFile file, String type) throws IOException;
+
+    File save(MultipartFile file);
 }

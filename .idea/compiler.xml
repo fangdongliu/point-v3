@@ -8,9 +8,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="compute-api-impl" />
         <module name="upload-api-impl" />
+        <module name="parent" />
         <module name="common" />
         <module name="auth" />
-        <module name="parent" />
         <module name="compute-api" />
         <module name="compute" />
         <module name="upload" />

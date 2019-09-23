@@ -5,16 +5,21 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.Table;
 
 @Data
 @Entity
+@Table(name = "sys_user")
 @Accessors(chain = true)
+@EntityListeners(AuditingEntityListener.class)
 public class User extends BaseEntityFromFile{
 
-    @Column(length = 100)
+    @Column(length = 100,unique = true)
     String username;
 
     @Column(length = 100)

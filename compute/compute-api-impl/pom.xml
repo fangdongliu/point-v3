@@ -21,6 +21,11 @@
     <dependencies>
         <dependency>
             <groupId>cn.fdongl.point</groupId>
+            <artifactId>upload-api-impl</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.fdongl.point</groupId>
             <artifactId>compute-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

@@ -1,7 +1,7 @@
 package cn.fdongl.point.uploadapi.service;
 
 import cn.fdongl.point.auth.vo.JwtUser;
-import org.springframework.data.domain.Page;
+import cn.fdongl.point.common.util.PageResult;
 import org.springframework.data.domain.Pageable;
 
 /**
@@ -22,6 +22,6 @@ public interface UploadService {
      * @param pageable 分页
      * @return 对应分页的文件列表
      */
-    Page page(Pageable pageable, JwtUser jwtUser);
+    PageResult page(Pageable pageable, JwtUser jwtUser);
 
 }

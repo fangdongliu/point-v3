@@ -16,7 +16,7 @@ public class TeacherController extends BaseController<TeacherService>{
 
     @PostMapping("upload")
     public Object upload(
-            @RequestParam MultipartFile file, boolean allowCover, JwtUser jwtUser) throws DataRepeatException {
+            @RequestParam MultipartFile file, boolean allowCover, JwtUser jwtUser) throws Exception {
         return Result.of(ErrorCode.SUCCESS,service.upload(file,allowCover,jwtUser));
     }
 
