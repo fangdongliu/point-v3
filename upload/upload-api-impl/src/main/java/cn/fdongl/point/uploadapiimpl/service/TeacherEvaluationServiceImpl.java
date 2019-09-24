@@ -59,6 +59,7 @@ public class TeacherEvaluationServiceImpl implements TeacherEvaluationService {
         List<Double>maxes = getMaxes(sheetHelper);
         List<Double>vals = getVals(sheetHelper);
         MapTeacherCourse mapTeacherCourse = mapTeacherCourseRepository.findById(id).get();
+        teacherEvaluationRepository.deleteAllByCreateByAndCourseNumberAndSemester(jwtUser.getId(),mapTeacherCourse.getCourseNumber(),mapTeacherCourse.getSemester());
         String courseNumber = mapTeacherCourse.getCourseNumber();
         Long semester = mapTeacherCourse.getSemester();
         Course course = courseRepository.findByNumberAndSemester(courseNumber,semester);
@@ -79,7 +80,7 @@ public class TeacherEvaluationServiceImpl implements TeacherEvaluationService {
                     .setChildIndex(indexPoint.getChildIndex())
                     .setParentIndex(indexPoint.getParentIndex())
                     .setCourseNumber(courseNumber)
-                    .setGrade(course.getGrade())
+                    .setSemester(mapTeacherCourse.getSemester())
                     .setVal(vals.get(i))
                     .setMaz(maxes.get(i));
             mapTeacherEvaluations.add(mapTeacherEvaluation);

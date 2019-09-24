@@ -17,7 +17,7 @@ public class MapStudentEvaluation extends BaseEntityFromFile{
 
     @Column(length = 100,nullable = false)
     String courseNumber;
-    Long grade;
+    Long semester;
     Long val;
     Long parentIndex;
     Long childIndex;

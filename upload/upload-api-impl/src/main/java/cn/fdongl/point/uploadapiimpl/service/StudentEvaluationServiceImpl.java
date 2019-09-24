@@ -68,7 +68,7 @@ public class StudentEvaluationServiceImpl implements StudentEvalutionService {
                     .setChildIndex(indexPoint.getChildIndex())
                     .setParentIndex(indexPoint.getParentIndex())
                     .setCourseNumber(evaluation.getCourseNumber())
-                    .setGrade(jwtUser.getGrade())
+                    .setSemester(evaluation.getCourseSemester())
                     .setVal(i.getEvaluationValue());
         }).collect(Collectors.toList()));
 

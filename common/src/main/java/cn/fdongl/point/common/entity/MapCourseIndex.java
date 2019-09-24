@@ -15,5 +15,7 @@ public class MapCourseIndex extends BaseEntityFromFile{
     Long courseId;
     Long grade;
     Double val;
+    Long parentIndex;
+    Long childIndex;
 
 }

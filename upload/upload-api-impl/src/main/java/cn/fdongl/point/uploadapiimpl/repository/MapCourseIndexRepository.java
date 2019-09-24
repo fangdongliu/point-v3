@@ -17,4 +17,6 @@ public interface MapCourseIndexRepository extends JpaRepository<MapCourseIndex,L
 
     List<MapCourseIndex> findAllByCourseId(Long courseId);
 
+    List<MapCourseIndex> findAllByCourseIdIn(List<Long> courseId);
+
 }

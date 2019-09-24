@@ -97,6 +97,8 @@ public class PlanServiceImpl implements PlanService {
                     mapCourseIndex.setCourseId(courseInfos.get(i).getId());
                     mapCourseIndex.setIndexId(indexPoints.get(j-2).getId());
                     mapCourseIndex.setVal(Double.valueOf(o.toString()));
+                    mapCourseIndex.setParentIndex(indexPoints.get(j-2).getParentIndex());
+                    mapCourseIndex.setChildIndex(indexPoints.get(j-2).getChildIndex());
                     mapCourseIndices.add(mapCourseIndex);
                 }
             }

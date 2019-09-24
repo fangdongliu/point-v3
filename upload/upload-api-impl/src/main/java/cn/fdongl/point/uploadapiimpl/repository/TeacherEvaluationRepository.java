@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TeacherEvaluationRepository extends JpaRepository<MapTeacherEvaluation,Long> {
 
+    void deleteAllByCreateByAndCourseNumberAndSemester(long createBy,String courseNumber,long semester);
 }
