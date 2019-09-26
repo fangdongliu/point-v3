@@ -6,30 +6,31 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="compute-api-impl" />
-        <module name="upload-api-impl" />
-        <module name="parent" />
-        <module name="common" />
         <module name="auth" />
-        <module name="compute-api" />
+        <module name="common" />
         <module name="compute" />
-        <module name="upload" />
+        <module name="compute-api" />
+        <module name="compute-api-impl" />
         <module name="exec" />
+        <module name="parent" />
+        <module name="point-v4" />
+        <module name="upload" />
         <module name="upload-api" />
+        <module name="upload-api-impl" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="auth" options="-parameters" />
-      <module name="common" options="-parameters" />
-      <module name="compute" options="-parameters" />
-      <module name="compute-api" options="-parameters" />
-      <module name="compute-api-impl" options="-parameters" />
-      <module name="exec" options="-parameters" />
-      <module name="upload" options="-parameters" />
-      <module name="upload-api" options="-parameters" />
-      <module name="upload-api-impl" options="-parameters" />
+      <module name="auth" options="" />
+      <module name="common" options="" />
+      <module name="compute" options="" />
+      <module name="compute-api" options="" />
+      <module name="compute-api-impl" options="" />
+      <module name="exec" options="" />
+      <module name="upload" options="" />
+      <module name="upload-api" options="" />
+      <module name="upload-api-impl" options="" />
     </option>
   </component>
 </project>

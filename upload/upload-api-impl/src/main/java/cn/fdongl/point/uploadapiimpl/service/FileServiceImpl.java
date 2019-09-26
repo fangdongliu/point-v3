@@ -13,10 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 
 @Service
@@ -39,7 +37,11 @@ public class FileServiceImpl implements FileService {
         java.io.File dest = new java.io.File(path + java.io.File.separator + fileId);
         if (dest.exists()) {
             response.setContentType("application/msexcel");
-            response.setHeader("Content-Disposition", "attachment;fileName=" + file.getFilename());
+            try {
+                response.setHeader("Content-Disposition", "attachment;fileName=" + URLEncoder.encode(file.getFilename(), "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
             try {
                 InputStream in = new FileInputStream(dest);
                 ServletOutputStream out = response.getOutputStream();
