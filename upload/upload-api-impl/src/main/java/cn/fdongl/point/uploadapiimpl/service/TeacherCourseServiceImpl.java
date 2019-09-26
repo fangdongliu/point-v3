@@ -105,6 +105,7 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
             int pos2 = selectNumber.lastIndexOf('-',pos1-1);
             return new MapTeacherCourse()
                     .setCourseNumber(courseNumber)
+                    .setCourseName(courseName)
                     .setWorkId(selectNumber.substring(pos2+1,pos1));
 
         }
