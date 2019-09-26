@@ -50,9 +50,9 @@ public class StudentServiceImpl implements StudentService {
     BatchUploadMapper batchUploadMapper;
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int upload(MultipartFile file, boolean allowCover, JwtUser jwtUser) throws DataRepeatException, WorkbookCastException {
-        File studentFile = fileService.save(file);
+        File studentFile = fileService.save(file,"student");
         final long fileId = studentFile.getId();
         final String password = passwordEncoder.encode("123456");
         Workbook workbook = Workbooks.of(file);

@@ -14,7 +14,7 @@ public interface ComputeMapper {
             "A.number = B.course_number and A.semester = B.semester ")
     List<Evaluation2> getTeacherEvaluationByGrade(int grade);
 
-    @Select("select A.number,A.semester,B.val,B.child_index as childIndex,B.parent_index as parentIndex from(select * from course where grade = #{param1})A join map_teacher_evaluation B on " +
+    @Select("select A.number,A.semester,B.val,B.child_index as childIndex,B.parent_index as parentIndex from(select * from course where grade = #{param1})A join map_student_evaluation B on " +
             "A.number = B.course_number and A.semester = B.semester ")
     List<Evaluation> getStudentEvaluationByGrade(int grade);
 
@@ -22,7 +22,7 @@ public interface ComputeMapper {
             "A.number = B.course_number and A.semester = B.semester ")
     List<Evaluation2> getTeacherEvaluationByYear(int left,int right);
 
-    @Select("select A.number,A.semester,B.val,B.child_index as childIndex,B.parent_index as parentIndex from(select * from course where semester between #{param1} and #{param2})A join map_teacher_evaluation B on " +
+    @Select("select A.number,A.semester,B.val,B.child_index as childIndex,B.parent_index as parentIndex from(select * from course where semester between #{param1} and #{param2})A join map_student_evaluation B on " +
             "A.number = B.course_number and A.semester = B.semester ")
     List<Evaluation> getStudentEvaluationByYear(int left,int right);
 

@@ -35,5 +35,4 @@ public interface FileService {
 
     void delete(long fileId);
 
-    File save(MultipartFile file);
 }

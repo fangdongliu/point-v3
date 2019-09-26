@@ -77,8 +77,4 @@ public class FileServiceImpl implements FileService {
         fileRepository.deleteById(fileId);
     }
 
-    @Override
-    public File save(MultipartFile file) {
-        return null;
-    }
 }
