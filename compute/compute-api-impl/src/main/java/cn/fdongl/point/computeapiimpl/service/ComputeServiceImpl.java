@@ -75,12 +75,18 @@ public class ComputeServiceImpl implements ComputeService {
         List<IndexPoint> indexPoints = indexPointRepository.findAllById(ids.stream()
                 .map(MapCourseIndex::getIndexId).collect(Collectors.toList()));
 //                .stream().collect(Collectors.toMap(i->i.getParentIndex()+"."+i.getChildIndex(),i->i,(a,b)->a));
-        Map<String,Evaluation2> teacherValue = teacher.stream().collect(Collectors.toMap(i->i.getNumber()+'-'+i.getSemester()+'-'+i.getParentIndex()+'-'+i.getChildIndex(),i->i,(a,b)->{
+        Map<String,Evaluation2> teacherValue = teacher.stream().collect(Collectors.toMap(i->i.getNumber()+'-'+i.getSemester()+'-'+i.getParentIndex()+'-'+i.getChildIndex(),i->{
+            i.setCount(1L);
+            return i;
+        },(a,b)->{
             a.setVal(b.getVal()+a.getVal());
             a.setCount(b.getCount()+a.getCount());
             return a;
         }));
-        Map<String,Evaluation> studentValue = student.stream().collect(Collectors.toMap(i->i.getNumber()+'-'+i.getSemester()+'-'+i.getParentIndex()+'-'+i.getChildIndex(),i->i,(a,b)->{
+        Map<String,Evaluation> studentValue = student.stream().collect(Collectors.toMap(i->i.getNumber()+'-'+i.getSemester()+'-'+i.getParentIndex()+'-'+i.getChildIndex(),i->{
+            i.setCount(1L);
+            return i;
+        },(a,b)->{
             a.setVal(b.getVal()+a.getVal());
             a.setCount(b.getCount()+a.getCount());
             return a;
@@ -114,7 +120,7 @@ public class ComputeServiceImpl implements ComputeService {
             IndexPoint indexPoint = indexPoints.get(0);
             Map<IndexPoint,Map<String,Double>>summary = new HashMap<>();
             List<List<String>>table = buildSheetTable(summary,teacherValue,studentValue,courses,indexPoints,mapCourseIndexMap);
-            HSSFSheet sheet = workbook.createSheet(indexPoint.getParent().substring(indexPoint.getParent().indexOf(0,'\n')).replaceAll("/",","));
+            HSSFSheet sheet = workbook.createSheet(indexPoint.getParent().substring(0,indexPoint.getParent().indexOf('\n')).replaceAll("/",","));
 
             fillHeader(sheet,indexPoints,headStyle,leftStyle);
             fillIndex(sheet,indexPoints,leftbarStyle);
