@@ -76,6 +76,7 @@ public class StudentServiceImpl implements StudentService {
         }
         if(allowCover){
             userRepository.deleteAllByUsernameIn(users.stream().map(User::getUsername).collect(Collectors.toList()));
+            userRepository.flush();
             BatchExecutor.batchExecute(mapStudentCourses,batchUploadMapper::insertStudentCourseIgnore);
         }else{
             BatchExecutor.batchExecute(mapStudentCourses,batchUploadMapper::insertStudentCourse);
@@ -122,7 +123,7 @@ public class StudentServiceImpl implements StudentService {
             mapStudentCourse.setCourseNumber(courseNumber);
             mapStudentCourse.setCourseName(courseName);
             mapStudentCourse.setRealName(realName);
-            mapStudentCourse.setSubCourseSemester(Long.valueOf(semester.substring(11)));
+            mapStudentCourse.setSubCourseSemester(Long.valueOf(semester.substring(10)));
             return mapStudentCourse;
         }
 

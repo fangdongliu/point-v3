@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
+
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
 
@@ -17,6 +19,8 @@ public interface UserRepository extends JpaRepository<User,Long> {
     Page<User> findByUsernameLikeOrRealNameLike(String username, String realName, Pageable pageable);
 
     @Query(value = "delete from sys_user where create_from = :createFrom",nativeQuery = true)
+    @Modifying
+    @Transactional
     int deleteAllByCreateFrom(@Param("createFrom") long createFrom);
 
 //    @Query(value = "delete from `user` where username in (:usernames)",nativeQuery = true)
