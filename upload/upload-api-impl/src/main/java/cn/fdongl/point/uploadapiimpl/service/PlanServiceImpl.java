@@ -17,9 +17,9 @@ import org.jboss.jandex.Index;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,7 @@ public class PlanServiceImpl implements PlanService {
     FileService fileService;
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int upload(MultipartFile plan, MultipartFile matrix, int grade, JwtUser jwtUser) throws WorkbookCastException, IOException {
         File planFile = fileService.save(plan,"plan");
         File matrixFile = fileService.save(matrix,"matrix");
@@ -58,7 +58,11 @@ public class PlanServiceImpl implements PlanService {
         String []header = getHeader(sheetHelper);
         List<IndexPoint>indexPoints = toIndexPoints(sheetHelper,header);
         List<CourseInfo>courseInfos = getCourseInfos(lines);
-        Plan p = new Plan()
+        Plan p = planRepository.findFirstByGrade(grade);
+        if(p==null){
+            p = new Plan();
+        }
+        p
                 .setGrade((long)grade)
                 .setMatrixId(matrixFile.getId())
                 .setPlanId(planFile.getId())

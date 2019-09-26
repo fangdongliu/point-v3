@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PlanRepository extends JpaRepository<Plan,Long> {
 
-
+    Plan findFirstByGrade(long grade);
 
 }
