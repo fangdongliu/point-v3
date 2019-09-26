@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -52,7 +53,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int upload(MultipartFile file, boolean allowCover, JwtUser jwtUser) throws DataRepeatException, WorkbookCastException, IOException {
+    public int upload(MultipartFile file, boolean allowCover, JwtUser jwtUser) throws DataRepeatException, WorkbookCastException, IOException, IllegalAccessException, ParseException, InstantiationException {
         File studentFile = fileService.save(file,"student");
         final long fileId = studentFile.getId();
         final String password = passwordEncoder.encode("123456");
@@ -83,12 +84,13 @@ public class StudentServiceImpl implements StudentService {
         return 0;
     }
 
-    private List<MapStudentCourse> getStudentCourseMap(SheetHelper sheetHelper) {
-        return null;
+    private List<MapStudentCourse> getStudentCourseMap(SheetHelper sheetHelper) throws IllegalAccessException, ParseException, InstantiationException {
+        List<UploadStudentCourse> lines = sheetHelper.collectLinesForClass(UploadStudentCourse.class, 1);
+        List<MapStudentCourse> courses = lines.stream().map(UploadStudentCourse::toMapStudentCourse).collect(Collectors.toList());
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int deleteByFile(long fileId, JwtUser jwtUser) {
         fileService.delete(fileId);
         int cnt = mapStudentCourseRepository.deleteAllByCreateFrom(fileId);
@@ -112,6 +114,18 @@ public class StudentServiceImpl implements StudentService {
         public String classNumber;
         public String courseNumber;
         public String courseName;
+
+        public MapStudentCourse toMapStudentCourse(){
+            MapStudentCourse mapStudentCourse = new MapStudentCourse();
+            mapStudentCourse.setWorkId(workId);
+            mapStudentCourse.setCourseSemester(Long.valueOf(semester.substring(0,4)));
+            mapStudentCourse.setCourseNumber(courseNumber);
+            mapStudentCourse.setCourseName(courseName);
+            mapStudentCourse.setRealName(realName);
+            mapStudentCourse.setSubCourseSemester(Long.valueOf(semester.substring(11)));
+            return mapStudentCourse;
+        }
+
     }
 
 }

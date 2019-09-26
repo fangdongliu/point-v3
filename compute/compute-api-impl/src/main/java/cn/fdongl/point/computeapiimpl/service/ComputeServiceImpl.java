@@ -71,7 +71,6 @@ public class ComputeServiceImpl implements ComputeService {
         if (courseInfos == null){
             throw new NoDataException("没有相应的培养实现矩阵",null);
         }
-        grade = courseInfos.get(0).getGrade();
         List<MapCourseIndex> ids = mapCourseIndexRepository.findAllByCourseIdIn(courseInfos.stream().map(CourseInfo::getId).collect(Collectors.toList()));
         List<IndexPoint> indexPoints = indexPointRepository.findAllById(ids.stream()
                 .map(MapCourseIndex::getIndexId).collect(Collectors.toList()));
@@ -88,7 +87,7 @@ public class ComputeServiceImpl implements ComputeService {
         }));
         List<List<IndexPoint>>header= indexPoints.stream().collect(Collectors.groupingBy(IndexPoint::getParent)).values().stream().sorted((a,b)->(int)(a.get(0).getParentIndex() - b.get(0).getParentIndex()))
         .collect(Collectors.toList());
-        HSSFWorkbook workbook = buildWorkbook(header,teacherValue,studentValue,list,ids);
+        HSSFWorkbook workbook = buildWorkbook(header,teacherValue,studentValue,list,ids,courseInfos);
         response.setContentType("application/vnd.ms-excel");
         System.out.println(name);
         String fileName = name;
@@ -102,19 +101,20 @@ public class ComputeServiceImpl implements ComputeService {
 
     }
 
-    private HSSFWorkbook buildWorkbook(List<List<IndexPoint>> header, Map<String, Evaluation2> teacherValue, Map<String, Evaluation> studentValue, List<Course> courses, List<MapCourseIndex> ids){
+    private HSSFWorkbook buildWorkbook(List<List<IndexPoint>> header, Map<String, Evaluation2> teacherValue, Map<String, Evaluation> studentValue, List<Course> courses, List<MapCourseIndex> ids, List<CourseInfo> courseInfos){
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFCellStyle headStyle = createHeadStyle(workbook);
         HSSFCellStyle leftStyle = createLeftStyle(workbook);
         HSSFCellStyle leftbarStyle = createLeftBarStyle(workbook);
         HSSFCellStyle valueStyle = createValueStyle(workbook);
-        Map<String,MapCourseIndex>mapCourseIndexMap = ids.stream().collect(Collectors.toMap(i->i.getParentIndex()+"."+i.getChildIndex(),i->i,(a,b)->a));
+        final Map<Long,String> courseMap = courseInfos.stream().collect(Collectors.toMap(CourseInfo::getId,CourseInfo::getNumber,(a,b)->a));
+        Map<String,MapCourseIndex>mapCourseIndexMap = ids.stream().collect(Collectors.toMap(i->courseMap.get(i.getCourseId())+"-"+i.getParentIndex()+"."+i.getChildIndex(),i->i,(a,b)->a));
         for (List<IndexPoint> indexPoints : header) {
             indexPoints.sort((a,b)->(int)(a.getChildIndex() - b.getChildIndex()));
             IndexPoint indexPoint = indexPoints.get(0);
             Map<IndexPoint,Map<String,Double>>summary = new HashMap<>();
             List<List<String>>table = buildSheetTable(summary,teacherValue,studentValue,courses,indexPoints,mapCourseIndexMap);
-            HSSFSheet sheet = workbook.createSheet(indexPoint.getParent().substring(indexPoint.getParent().indexOf('\n')).replaceAll("/",","));
+            HSSFSheet sheet = workbook.createSheet(indexPoint.getParent().substring(indexPoint.getParent().indexOf(0,'\n')).replaceAll("/",","));
 
             fillHeader(sheet,indexPoints,headStyle,leftStyle);
             fillIndex(sheet,indexPoints,leftbarStyle);
@@ -199,7 +199,7 @@ public class ComputeServiceImpl implements ComputeService {
             line.add(course.getName()+'\n'+course.getSemester());
             for (IndexPoint indexPoint : indexPoints) {
                 Map<String,Double> m = summary.get(indexPoint);
-                MapCourseIndex mapCourseIndex = mapCourseIndexMap.get(indexPoint.getParentIndex()+"."+indexPoint.getChildIndex());
+                MapCourseIndex mapCourseIndex = mapCourseIndexMap.get(course.getNumber()+"-"+indexPoint.getParentIndex()+"."+indexPoint.getChildIndex());
                 if(mapCourseIndex == null){
                     line.add(null);
                     continue;

@@ -6,6 +6,7 @@ import cn.fdongl.point.uploadapi.exception.DataRepeatException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 public interface StudentService extends UploadService{
     /**
@@ -15,5 +16,5 @@ public interface StudentService extends UploadService{
      * @return 成功插入的学生选课记录条数
      * @throws DataRepeatException
      */
-    int upload(MultipartFile file, boolean allowCover, JwtUser jwtUser) throws DataRepeatException, WorkbookCastException, IOException;
+    int upload(MultipartFile file, boolean allowCover, JwtUser jwtUser) throws DataRepeatException, WorkbookCastException, IOException, IllegalAccessException, ParseException, InstantiationException;
 }
