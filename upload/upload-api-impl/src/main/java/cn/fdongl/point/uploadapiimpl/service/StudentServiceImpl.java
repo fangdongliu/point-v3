@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -51,7 +52,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int upload(MultipartFile file, boolean allowCover, JwtUser jwtUser) throws DataRepeatException, WorkbookCastException {
+    public int upload(MultipartFile file, boolean allowCover, JwtUser jwtUser) throws DataRepeatException, WorkbookCastException, IOException {
         File studentFile = fileService.save(file,"student");
         final long fileId = studentFile.getId();
         final String password = passwordEncoder.encode("123456");

@@ -11,13 +11,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("student")
 public class StudentController extends BaseController<StudentService>{
 
     @PostMapping("upload")
     public Object upload(
-            @RequestParam MultipartFile file, boolean allowCover, JwtUser jwtUser) throws DataRepeatException, WorkbookCastException {
+            @RequestParam MultipartFile file, boolean allowCover, JwtUser jwtUser) throws DataRepeatException, WorkbookCastException, IOException {
         return Result.of(ErrorCode.SUCCESS,service.upload(file,allowCover,jwtUser));
     }
 
