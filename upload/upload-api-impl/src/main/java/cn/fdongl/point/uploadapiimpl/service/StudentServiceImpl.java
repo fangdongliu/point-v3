@@ -86,7 +86,7 @@ public class StudentServiceImpl implements StudentService {
 
     private List<MapStudentCourse> getStudentCourseMap(SheetHelper sheetHelper) throws IllegalAccessException, ParseException, InstantiationException {
         List<UploadStudentCourse> lines = sheetHelper.collectLinesForClass(UploadStudentCourse.class, 1);
-        List<MapStudentCourse> courses = lines.stream().map(UploadStudentCourse::toMapStudentCourse).collect(Collectors.toList());
+        return lines.stream().map(UploadStudentCourse::toMapStudentCourse).collect(Collectors.toList());
     }
 
     @Override
