@@ -20,6 +20,7 @@ public class DataInitRunner implements CommandLineRunner {
         User user = new User()
                 .setUsername("admin")
                 .setRealName("admin")
+                .setRole("admin")
                 .setPassword(passwordEncoder.encode("123456"));
         try {
             userRepository.save(user);

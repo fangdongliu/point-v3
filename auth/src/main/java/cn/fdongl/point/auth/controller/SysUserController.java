@@ -25,7 +25,7 @@ public class SysUserController {
     private UserRepository userRepository;
 
     @PostMapping(value = "getInfo")
-    @RolesAllowed({"admin", "professor"})
+//    @RolesAllowed({"admin", "professor"})
     public Object getInfo(@RequestParam(value = "userId") Long userId){
         Optional<User> theUser = userRepository.findById(userId);
         if (theUser.isPresent()){
@@ -73,7 +73,7 @@ public class SysUserController {
     }
 
     @PostMapping(value = "page")
-    @RolesAllowed({"admin", "professor"})
+//    @RolesAllowed({"admin", "professor"})
     public Object getAll(
             @RequestParam int pageIndex,
             @RequestParam int pageSize,

@@ -72,7 +72,7 @@ public class TeacherEvaluationServiceImpl implements TeacherEvaluationService {
         for(int i=indices.size()-1;i>=0;i--){
             String s = indices.get(i);
             MapTeacherEvaluation mapTeacherEvaluation = new MapTeacherEvaluation();
-            IndexPoint indexPoint = indexPointMap.get(s.substring(s.indexOf(' ')));
+            IndexPoint indexPoint = indexPointMap.get(s.substring(0,s.indexOf(' ')));
             if(indexPoint == null){
                 throw new Exception();
             }
@@ -86,6 +86,8 @@ public class TeacherEvaluationServiceImpl implements TeacherEvaluationService {
             mapTeacherEvaluations.add(mapTeacherEvaluation);
         }
         teacherEvaluationRepository.saveAll(mapTeacherEvaluations);
+        mapTeacherCourse.setStatuz(1L);
+        mapTeacherCourseRepository.save(mapTeacherCourse);
         return mapTeacherEvaluations.size();
     }
 
