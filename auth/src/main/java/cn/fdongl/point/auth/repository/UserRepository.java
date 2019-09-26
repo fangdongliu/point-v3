@@ -16,7 +16,8 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     Page<User> findByUsernameLikeOrRealNameLike(String username, String realName, Pageable pageable);
 
-    int deleteAllByCreateFrom(long createFrom);
+    @Query(value = "delete from sys_user where create_from = :createFrom",nativeQuery = true)
+    int deleteAllByCreateFrom(@Param("createFrom") long createFrom);
 
 //    @Query(value = "delete from `user` where username in (:usernames)",nativeQuery = true)
 //    @Modifying
