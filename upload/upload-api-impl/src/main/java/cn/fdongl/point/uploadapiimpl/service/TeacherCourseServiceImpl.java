@@ -78,6 +78,7 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
     @Override
     @Transactional
     public int deleteByFile(long fileId, JwtUser jwtUser) {
+        fileService.delete(fileId);
         return mapTeacherCourseRepository.deleteAllByCreateFrom(fileId);
     }
 

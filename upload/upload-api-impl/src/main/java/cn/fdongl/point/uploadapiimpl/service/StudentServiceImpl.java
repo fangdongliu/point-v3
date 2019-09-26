@@ -89,6 +89,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public int deleteByFile(long fileId, JwtUser jwtUser) {
+        fileService.delete(fileId);
         int cnt = mapStudentCourseRepository.deleteAllByCreateFrom(fileId);
         cnt += userRepository.deleteAllByCreateFrom(fileId);
         return cnt;

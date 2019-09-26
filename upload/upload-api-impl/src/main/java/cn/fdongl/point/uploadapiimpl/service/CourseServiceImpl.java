@@ -78,6 +78,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     @Transactional
     public int deleteByFile(long fileId, JwtUser jwtUser) {
+        fileService.delete(fileId);
         return courseRepository.deleteAllByCreateFrom(fileId);
     }
 

@@ -33,5 +33,7 @@ public interface FileService {
      */
     File save(MultipartFile file, String type) throws IOException;
 
+    void delete(long fileId);
+
     File save(MultipartFile file);
 }
