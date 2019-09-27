@@ -12,6 +12,7 @@
         <module name="compute-api" />
         <module name="compute-api-impl" />
         <module name="exec" />
+        <module name="keyong" />
         <module name="parent" />
         <module name="point-v4" />
         <module name="upload" />
