@@ -228,7 +228,7 @@ public class ComputeServiceImpl implements ComputeService {
                     }
                     line.add(String.format("%.2f",val)+suffix);
                 } else if ((evaluation = studentValue.get(key))!=null){
-                    Double val = ((double)evaluation.getVal()) / evaluation2.getCount() / 4.0;
+                    Double val = ((double)evaluation.getVal()) / evaluation.getCount() / 4.0 * mapCourseIndex.getVal();
                     Double lastVal = m.get(course.getNumber());
                     if (lastVal == null || lastVal > val){
                         m.put(course.getNumber(),val);

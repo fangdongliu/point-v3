@@ -106,6 +106,7 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
             return new MapTeacherCourse()
                     .setCourseNumber(courseNumber)
                     .setCourseName(courseName)
+                    .setStatuz(0L)
                     .setWorkId(selectNumber.substring(pos2+1,pos1));
 
         }

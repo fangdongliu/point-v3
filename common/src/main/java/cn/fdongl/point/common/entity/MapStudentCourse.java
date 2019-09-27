@@ -23,6 +23,7 @@ public class MapStudentCourse extends BaseEntityFromFile{
     Long courseSemester;
     Long subCourseSemester;
     String courseName;
+    @Column(columnDefinition = "int default 0")
     Long statuz;
 
 }

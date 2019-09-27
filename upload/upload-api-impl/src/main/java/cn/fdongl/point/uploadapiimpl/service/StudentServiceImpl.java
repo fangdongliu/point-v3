@@ -124,6 +124,7 @@ public class StudentServiceImpl implements StudentService {
             mapStudentCourse.setCourseNumber(courseNumber);
             mapStudentCourse.setCourseName(courseName);
             mapStudentCourse.setRealName(realName);
+            mapStudentCourse.setStatuz(0L);
             mapStudentCourse.setSubCourseSemester(Long.valueOf(semester.substring(10)));
             return mapStudentCourse;
         }

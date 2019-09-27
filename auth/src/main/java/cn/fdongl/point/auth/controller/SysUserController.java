@@ -66,7 +66,7 @@ public class SysUserController {
         User user = new User()
                 .setDepartment(department)
                 .setUsername(username)
-                .setRealName(role)
+                .setRole(role)
                 .setPassword(passwordEncoder.encode("123456"));
         userRepository.save(user);
         return Result.of(ErrorCode.SUCCESS, user).addDetail("新增用户成功");
@@ -80,6 +80,7 @@ public class SysUserController {
             @RequestParam(required = false,defaultValue = "%") String searchKey
     ){
         PageRequest pageRequest = PageRequest.of(pageIndex-1,pageSize);
+        searchKey = "%" + searchKey + '%';
         return Result.of(ErrorCode.SUCCESS,
                 PageResult.ofPage(
                         userRepository
