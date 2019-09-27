@@ -26,10 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -50,6 +47,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     BatchUploadMapper batchUploadMapper;
+
+    private final Set<String> keySet = new HashSet<>(Arrays.asList("校工选课","拓展英语","专业课"));
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -87,7 +86,7 @@ public class StudentServiceImpl implements StudentService {
 
     private List<MapStudentCourse> getStudentCourseMap(SheetHelper sheetHelper) throws IllegalAccessException, ParseException, InstantiationException {
         List<UploadStudentCourse> lines = sheetHelper.collectLinesForClass(UploadStudentCourse.class, 1);
-        return lines.stream().filter(i->!("校公选课".equals(i.getType()) || "专业课".equals(i.getType()))).map(UploadStudentCourse::toMapStudentCourse).collect(Collectors.toList());
+        return lines.stream().filter(i->!(keySet.contains(i.getType()))).map(UploadStudentCourse::toMapStudentCourse).collect(Collectors.toList());
     }
 
     @Override
