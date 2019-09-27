@@ -59,7 +59,7 @@ public class StudentServiceImpl implements StudentService {
         final String password = passwordEncoder.encode("123456");
         Workbook workbook = Workbooks.of(file);
         SheetHelper sheetHelper = new SheetHelper(workbook.getSheetAt(0),0);
-        List<MapStudentCourse>mapStudentCourses = getStudentCourseMap(sheetHelper).stream().filter(i->!("校公选课".equals(i) || "专业课".equals(i))).collect(Collectors.toList());
+        List<MapStudentCourse>mapStudentCourses = getStudentCourseMap(sheetHelper);
         Collection<User> users = mapStudentCourses.stream().collect(Collectors.toMap(MapStudentCourse::getWorkId, i->{
             User user = new User();
             user
@@ -87,7 +87,7 @@ public class StudentServiceImpl implements StudentService {
 
     private List<MapStudentCourse> getStudentCourseMap(SheetHelper sheetHelper) throws IllegalAccessException, ParseException, InstantiationException {
         List<UploadStudentCourse> lines = sheetHelper.collectLinesForClass(UploadStudentCourse.class, 1);
-        return lines.stream().map(UploadStudentCourse::toMapStudentCourse).collect(Collectors.toList());
+        return lines.stream().filter(i->!("校公选课".equals(i.getType()) || "专业课".equals(i.getType()))).map(UploadStudentCourse::toMapStudentCourse).collect(Collectors.toList());
     }
 
     @Override
@@ -115,7 +115,9 @@ public class StudentServiceImpl implements StudentService {
         public String classNumber;
         public String courseNumber;
         public String courseName;
-
+        public String transient3;
+        public String transient4;
+        public String type;
         public MapStudentCourse toMapStudentCourse(){
             MapStudentCourse mapStudentCourse = new MapStudentCourse();
             mapStudentCourse.setWorkId(workId);
