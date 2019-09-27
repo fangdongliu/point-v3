@@ -59,7 +59,7 @@ public class StudentServiceImpl implements StudentService {
         final String password = passwordEncoder.encode("123456");
         Workbook workbook = Workbooks.of(file);
         SheetHelper sheetHelper = new SheetHelper(workbook.getSheetAt(0),0);
-        List<MapStudentCourse>mapStudentCourses = getStudentCourseMap(sheetHelper);
+        List<MapStudentCourse>mapStudentCourses = getStudentCourseMap(sheetHelper).stream().filter(i->!("校公选课".equals(i) || "专业课".equals(i))).collect(Collectors.toList());
         Collection<User> users = mapStudentCourses.stream().collect(Collectors.toMap(MapStudentCourse::getWorkId, i->{
             User user = new User();
             user
